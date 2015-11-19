@@ -14,9 +14,9 @@ Uses [cheerio](https://github.com/cheeriojs/cheerio) for scraping.
 `scrape-cache` exposes one method: `scrape(url, scraper, callback)`.
 Its parameters:
 
-* **url** String
+* `**url**` String
 
-    The URL to scrape
+    The URL to scrape.
 
 * **scraper**($) Function
 
