@@ -33,7 +33,7 @@ Its parameters:
 
 ### Full usage example
 
-To scrape an H1:
+To scrape the contents of an H1:
 
     var scrapeCache = require('scrape-cache');
 
