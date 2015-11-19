@@ -15,9 +15,11 @@ Uses [cheerio](https://github.com/cheeriojs/cheerio) for scraping.
 Its parameters:
 
 * **url** String
+
     The URL to scrape
 
 * **scraper**($) Function
+
     A function that scrapes the HTML and returns data that will be
     passed to `callback`.
 
@@ -25,6 +27,7 @@ Its parameters:
     jQuery-like object with the HTML already loaded.
 
 * **callback**(result) Function
+
     A function that does something with `result`.
 
 
