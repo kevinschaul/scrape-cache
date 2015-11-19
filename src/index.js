@@ -1,24 +1,22 @@
-var _ = require('underscore');
 var cheerio = require('cheerio');
 var fs = require('fs');
 var request = require('request');
 var slug = require('slug');
 
 module.exports = function() {
-    // TODO Fix api (userOpts should be optional)
-    var scrape = function(url, userOpts, scraper) {
-        var opts = _.extend({
+    var scrape = function(url, scraper, callback) {
+        var opts = {
             cachePath: './scrape-cache/',
             slugifyFunction: slug
-        }, userOpts);
+        };
 
-        var cachedFilename = opts.cachePath + opts.slugifyFunction(url) +
-                '.html';
+        var cachedFilename = opts.cachePath + opts.slugifyFunction(url) + '.html';
 
         // Try to read from file
         try {
             var html = fs.readFileSync(cachedFilename, 'utf8');
-            return _scrapeHTML(html, scraper);
+            var result = _scrapeHTML(html, scraper);
+            callback(result);
         } catch (e) {
             // If file does not yet exist, request it
             if (e.code === 'ENOENT') {
@@ -33,7 +31,8 @@ module.exports = function() {
                     }
                     fs.writeFileSync(cachedFilename, body);
 
-                    return _scrapeHTML(body, scraper);
+                    var result = _scrapeHTML(body, scraper);
+                    callback(result);
                 });
             } else {
                 throw e;

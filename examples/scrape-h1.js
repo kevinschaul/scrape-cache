@@ -7,7 +7,10 @@ if (process.argv.length != 3) {
 
 var url = process.argv[2];
 
-var h1 = scrapeCache.scrape(url, {}, function($) {
+var scrapeH1 = function($) {
     return $('h1').text();
+};
+
+scrapeCache.scrape(url, scrapeH1, function(result) {
+    console.log(result);
 });
-console.log(h1);
